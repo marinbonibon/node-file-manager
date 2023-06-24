@@ -8,6 +8,7 @@ import { getList } from '../commands/ls.js';
 import { changeDir } from '../commands/cd.js';
 import { goUpper } from '../commands/up.js';
 import { addFile } from '../commands/add.js';
+import { readFile } from '../commands/cat.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -56,6 +57,9 @@ const start = async () => {
         break;
         case 'add':
         await addFile(destination);
+        break;
+        case 'cat':
+        await readFile(destination);
         break;
       default:
         console.log('Invalid input');
