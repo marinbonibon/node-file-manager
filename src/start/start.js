@@ -6,6 +6,7 @@ import { stdin } from 'node:process';
 import { exitProgram } from '../utils/exit.js';
 import { getList } from '../commands/ls.js';
 import { changeDir } from '../commands/cd.js';
+import { goUpper } from '../commands/up.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -48,6 +49,9 @@ const start = async () => {
         break;
       case 'cd':
         changeDir(workingDirectoryPath, destination);
+        break;
+      case 'up':
+        goUpper();
         break;
       default:
         console.log('Invalid input');
