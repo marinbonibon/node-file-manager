@@ -5,6 +5,7 @@ import { showHomeDir, workingDirectoryPath } from '../utils/homedir.js';
 import { stdin } from 'node:process';
 import { exitProgram } from '../utils/exit.js';
 import { getList } from '../commands/ls.js';
+import { cd } from '../commands/cd.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -34,15 +35,19 @@ const start = async () => {
   });
 
   stdin.on('data', async (data) => {
-    const currentCommand = data.toString().trim();
+    const currentCommandArray = data.toString().trim().split(' ');
+    const [command, destination] = currentCommandArray;
 
-    if (currentCommand.includes('.exit')) {
+    if (command.includes('.exit')) {
       exitProgram(userName);
       return;
     }
-    switch (currentCommand) {
+    switch (command) {
       case 'ls':
         getList(workingDirectoryPath);
+        break;
+      case 'cd':
+        cd(workingDirectoryPath, destination);
         break;
       default:
         console.log('Invalid input');
