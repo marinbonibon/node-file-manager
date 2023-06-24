@@ -9,6 +9,7 @@ import { changeDir } from '../commands/cd.js';
 import { goUpper } from '../commands/up.js';
 import { addFile } from '../commands/add.js';
 import { readFile } from '../commands/cat.js';
+import { renameFile } from '../commands/rn.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -39,7 +40,7 @@ const start = async () => {
 
   stdin.on('data', async (data) => {
     const currentCommandArray = data.toString().trim().split(' ');
-    const [command, destination] = currentCommandArray;
+    const [command, sourse, destination] = currentCommandArray;
 
     if (command.includes('.exit')) {
       exitProgram(userName);
@@ -50,22 +51,25 @@ const start = async () => {
         getList(workingDirectoryPath);
         break;
       case 'cd':
-        changeDir(workingDirectoryPath, destination);
+        changeDir(workingDirectoryPath, sourse);
         break;
       case 'up':
         goUpper();
         break;
-        case 'add':
-        await addFile(destination);
+      case 'add':
+        await addFile(sourse);
         break;
-        case 'cat':
-        await readFile(destination);
+      case 'cat':
+        await readFile(sourse);
+        break;
+      case 'rn':
+        await renameFile(workingDirectoryPath, sourse, destination);
         break;
       default:
         console.log('Invalid input');
     }
     setTimeout(showHomeDir, 100);
-  })
+  });
 };
 
 await start();
