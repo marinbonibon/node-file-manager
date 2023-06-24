@@ -1,19 +1,22 @@
 import { readdir } from 'node:fs';
+import { OperationFailMsg } from './files/constants.js';
 
 export const getList = (folderPath) => {
   return readdir(folderPath, { withFileTypes: true }, (err, files) => {
-    if (err) console.error(err);
+    if (err) console.error(OperationFailMsg);
 
-    const folderContent = [];
+    const folderDir = [];
+    const folderFiles = [];
 
     files.forEach((file) => {
       if (file.isFile()) {
-        folderContent.push({name: file.name, type: 'file'});
+        folderFiles.push({name: file.name, type: 'file'});
       } else {
-        folderContent.push({name: file.name, type: 'directory'});
+        folderDir.push({name: file.name, type: 'directory'});
       }
     });
 
+    const folderContent = [...folderDir, ...folderFiles];
     console.table(folderContent);
   });
 };

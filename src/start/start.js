@@ -5,7 +5,7 @@ import { showHomeDir, workingDirectoryPath } from '../utils/homedir.js';
 import { stdin } from 'node:process';
 import { exitProgram } from '../utils/exit.js';
 import { getList } from '../commands/ls.js';
-import { cd } from '../commands/cd.js';
+import { changeDir } from '../commands/cd.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -47,7 +47,7 @@ const start = async () => {
         getList(workingDirectoryPath);
         break;
       case 'cd':
-        cd(workingDirectoryPath, destination);
+        changeDir(workingDirectoryPath, destination);
         break;
       default:
         console.log('Invalid input');
