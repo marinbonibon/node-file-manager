@@ -2,7 +2,7 @@ import { access } from 'node:fs';
 import { OperationFailMsg } from './files/constants.js';
 import { saveHomeDir, workingDirectoryPath } from '../utils/homedir.js';
 
-export const goUpper = () => {
+export const goUpper = async () => {
   const root = '/';
   const separator = workingDirectoryPath.includes('/') ? '/' : '\\';
   let newPath = workingDirectoryPath.split(separator);

@@ -1,7 +1,7 @@
 import { readdir } from 'node:fs';
 import { OperationFailMsg } from './files/constants.js';
 
-export const getList = (folderPath) => {
+export const getList = async (folderPath) => {
   return readdir(folderPath, { withFileTypes: true }, (err, files) => {
     if (err) console.error(OperationFailMsg);
 
