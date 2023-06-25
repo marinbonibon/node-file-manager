@@ -15,6 +15,7 @@ import { copyFile } from '../commands/cp.js';
 import { moveFile } from '../commands/mv.js';
 import { compressFile } from '../commands/compress.js';
 import { decompressFile } from '../commands/decompress.js';
+import { calcHash } from '../commands/hash.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -84,6 +85,9 @@ const start = async () => {
         break;
       case 'decompress':
         await decompressFile(source, destination); // f.ex.: decompress archive.br test.txt
+        break;
+      case 'hash':
+        await calcHash(source);
         break;
       default:
         console.log('Invalid input');
