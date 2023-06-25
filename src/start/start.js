@@ -13,6 +13,7 @@ import { renameFile } from '../commands/rn.js';
 import { removeFile } from '../commands/rm.js';
 import { copyFile } from '../commands/cp.js';
 import { moveFile } from '../commands/mv.js';
+import { compressFile } from '../commands/compress.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -76,6 +77,9 @@ const start = async () => {
         break;
       case 'mv':
         await moveFile(source, destination); // f.ex.: mv test.txt my_folder/test.txt
+        break;
+      case 'compress':
+        await compressFile(source, destination); // f.ex.: compress test.txt archive.br
         break;
       default:
         console.log('Invalid input');
