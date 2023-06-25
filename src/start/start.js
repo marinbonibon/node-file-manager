@@ -11,6 +11,7 @@ import { addFile } from '../commands/add.js';
 import { readFile } from '../commands/cat.js';
 import { renameFile } from '../commands/rn.js';
 import { removeFile } from '../commands/rm.js';
+import { copyFile } from '../commands/cp.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -68,6 +69,9 @@ const start = async () => {
         break;
       case 'rm':
         await removeFile(source);
+        break;
+      case 'cp':
+        await copyFile(source, destination); // f.ex.: cp test.txt my_folder/test.txt
         break;
       default:
         console.log('Invalid input');
