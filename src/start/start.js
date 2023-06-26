@@ -17,6 +17,7 @@ import { compressFile } from '../commands/compress.js';
 import { decompressFile } from '../commands/decompress.js';
 import { calcHash } from '../commands/hash.js';
 import { getOsInfo } from '../commands/os.js';
+import { invalidInputMsg, operationFailMsg } from '../commands/files/constants.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -24,14 +25,19 @@ const start = async () => {
   const filePath = join(__dirname, 'files', 'username.js');
   const prefix = '--username=';
   const defaultName = 'Stranger';
-  const argValue = process.argv.find(arg => arg.startsWith(prefix)).substr(prefix.length);
-  const userName = argValue.length ? argValue : defaultName;
+
+  const userName = process.argv.slice(2).find(arg => {
+    if (arg.startsWith(prefix)) {
+      return arg;
+    } else {
+      console.error(invalidInputMsg);
+    }
+  })?.substr(prefix.length) || defaultName;
   const content = `export const userName = '${userName}';`;
-  const invalidInputMsg = 'Invalid input';
 
   writeFile(filePath, content, (err) => {
     if (err) {
-      console.error(err);
+      console.error(operationFailMsg);
     }
   });
 

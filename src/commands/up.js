@@ -1,5 +1,5 @@
 import { access } from 'node:fs';
-import { OperationFailMsg } from './files/constants.js';
+import { operationFailMsg } from './files/constants.js';
 import { saveHomeDir, workingDirectoryPath } from '../utils/homedir.js';
 
 export const goUpper = async () => {
@@ -11,7 +11,7 @@ export const goUpper = async () => {
 
   access(newPath, (err) => {
     if (err) {
-      console.error(OperationFailMsg);
+      console.error(operationFailMsg);
     } else {
       process.chdir(newPath);
       saveHomeDir(newPath);

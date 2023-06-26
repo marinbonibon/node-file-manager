@@ -1,7 +1,7 @@
 import { createReadStream, createWriteStream } from 'node:fs';
 import { pipeline } from 'node:stream';
 import { createBrotliDecompress } from 'node:zlib';
-import { OperationFailMsg } from './files/constants.js';
+import { operationFailMsg } from './files/constants.js';
 
 export const decompressFile = async (sourcePath, destinationPath) => {
   const readStream = createReadStream(sourcePath);
@@ -10,7 +10,7 @@ export const decompressFile = async (sourcePath, destinationPath) => {
 
   pipeline(readStream, compressStream, writeStream, (err) => {
     if (err) {
-      console.error(OperationFailMsg);
+      console.error(operationFailMsg);
     }
   });
 }

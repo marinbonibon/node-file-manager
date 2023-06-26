@@ -1,6 +1,6 @@
 import { cpus, EOL, homedir, userInfo } from 'node:os';
 import { arch } from 'node:process';
-import { OperationFailMsg } from './files/constants.js';
+import { invalidInputMsg } from './files/constants.js';
 
 const getCpus = () => {
   const cpusArr = cpus().map((cpu) => cpu.model);
@@ -33,6 +33,6 @@ export const getOsInfo = async (arg) => {
       console.log(arch);
       break;
     default:
-      console.log(OperationFailMsg);
+      console.log(invalidInputMsg);
   }
 };

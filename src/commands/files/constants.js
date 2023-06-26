@@ -1,1 +1,2 @@
-export const OperationFailMsg = 'Operation failed';
+export const operationFailMsg = 'Operation failed';
+export const invalidInputMsg = 'Invalid input';

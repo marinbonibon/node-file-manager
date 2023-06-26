@@ -1,5 +1,5 @@
 import { createReadStream, createWriteStream } from 'node:fs';
-import { OperationFailMsg } from './files/constants.js';
+import { operationFailMsg } from './files/constants.js';
 
 export const copyFile = async (sourcePath, destinationPath) => {
   const readStream = createReadStream(sourcePath);
@@ -8,10 +8,10 @@ export const copyFile = async (sourcePath, destinationPath) => {
   readStream.pipe(writeStream);
 
   readStream.on('error', () => {
-    console.error(OperationFailMsg);
+    console.error(operationFailMsg);
   });
 
   writeStream.on('error', () => {
-    console.error(OperationFailMsg);
+    console.error(operationFailMsg);
   });
 }

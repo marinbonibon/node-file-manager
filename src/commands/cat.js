@@ -1,5 +1,5 @@
 import { createReadStream } from 'node:fs';
-import { OperationFailMsg } from './files/constants.js';
+import { operationFailMsg } from './files/constants.js';
 
 export const readFile = async (filePath) => {
   const stream = createReadStream(filePath);
@@ -7,6 +7,6 @@ export const readFile = async (filePath) => {
     process.stdout.write(data);
   })
   stream.on('error', () => {
-    console.error(OperationFailMsg);
+    console.error(operationFailMsg);
   });
 };
