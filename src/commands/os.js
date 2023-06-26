@@ -13,9 +13,7 @@ const getUserName = () => {
   console.log('userName', userName);
 };
 
-export const getOsInfo = async (arg) => {
-  const prefix = '--';
-  const argText = arg.substring(prefix.length).trim();
+const callCommand = (argText) => {
   switch (argText) {
     case 'cpus':
       getCpus();
@@ -23,7 +21,7 @@ export const getOsInfo = async (arg) => {
     case 'EOL':
       console.log(JSON.stringify(EOL));
       break;
-      case 'homedir':
+    case 'homedir':
       console.log(homedir());
       break;
     case 'username':
@@ -33,6 +31,16 @@ export const getOsInfo = async (arg) => {
       console.log(arch);
       break;
     default:
-      console.log(invalidInputMsg);
+      console.error(invalidInputMsg);
+  }
+}
+
+export const getOsInfo = async (arg) => {
+  try {
+    const prefix = '--';
+    const argText = arg.substring(prefix.length).trim();
+    callCommand(argText);
+  } catch (err) {
+    console.error(invalidInputMsg);
   }
 };

@@ -1,8 +1,12 @@
 import { unlink } from 'node:fs';
-import { operationFailMsg } from './files/constants.js';
+import { invalidInputMsg, operationFailMsg } from './files/constants.js';
 
 export const removeFile = async (filePath) => {
-  unlink(filePath, (err) => {
-    if (err) console.error(operationFailMsg);
+  try {
+    unlink(filePath, (err) => {
+      if (err) console.error(operationFailMsg);
     })
+  } catch (err) {
+    console.error(invalidInputMsg);
+  }
 };
