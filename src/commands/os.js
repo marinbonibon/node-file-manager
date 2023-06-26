@@ -1,4 +1,4 @@
-import { cpus } from 'node:os';
+import { cpus, EOL } from 'node:os';
 import { OperationFailMsg } from './files/constants.js';
 
 const getCpus = () => {
@@ -13,6 +13,9 @@ export const getOsInfo = async (arg) => {
   switch (argText) {
     case 'cpus':
       getCpus();
+      break;
+    case 'EOL':
+      console.log(JSON.stringify(EOL));
       break;
     default:
       console.log(OperationFailMsg);
