@@ -16,6 +16,7 @@ import { moveFile } from '../commands/mv.js';
 import { compressFile } from '../commands/compress.js';
 import { decompressFile } from '../commands/decompress.js';
 import { calcHash } from '../commands/hash.js';
+import { getOsInfo } from '../commands/os.js';
 
 const start = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -26,6 +27,7 @@ const start = async () => {
   const argValue = process.argv.find(arg => arg.startsWith(prefix)).substr(prefix.length);
   const userName = argValue.length ? argValue : defaultName;
   const content = `export const userName = '${userName}';`;
+  const invalidInputMsg = 'Invalid input';
 
   writeFile(filePath, content, (err) => {
     if (err) {
@@ -89,8 +91,11 @@ const start = async () => {
       case 'hash':
         await calcHash(source);
         break;
+      case 'os':
+        await getOsInfo(source);
+        break;
       default:
-        console.log('Invalid input');
+        console.log(invalidInputMsg);
     }
     setTimeout(showHomeDir, 100);
   });
