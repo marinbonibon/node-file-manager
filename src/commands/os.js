@@ -1,4 +1,4 @@
-import { cpus, EOL } from 'node:os';
+import { cpus, EOL, homedir } from 'node:os';
 import { OperationFailMsg } from './files/constants.js';
 
 const getCpus = () => {
@@ -16,6 +16,9 @@ export const getOsInfo = async (arg) => {
       break;
     case 'EOL':
       console.log(JSON.stringify(EOL));
+      break;
+      case 'homedir':
+      console.log(homedir());
       break;
     default:
       console.log(OperationFailMsg);
