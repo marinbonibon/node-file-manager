@@ -1,4 +1,5 @@
 import { cpus, EOL, homedir, userInfo } from 'node:os';
+import { arch } from 'node:process';
 import { OperationFailMsg } from './files/constants.js';
 
 const getCpus = () => {
@@ -25,8 +26,11 @@ export const getOsInfo = async (arg) => {
       case 'homedir':
       console.log(homedir());
       break;
-      case 'username':
+    case 'username':
       getUserName();
+      break;
+    case 'architecture':
+      console.log(arch);
       break;
     default:
       console.log(OperationFailMsg);
