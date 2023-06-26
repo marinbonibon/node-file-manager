@@ -1,10 +1,15 @@
-import { cpus, EOL, homedir } from 'node:os';
+import { cpus, EOL, homedir, userInfo } from 'node:os';
 import { OperationFailMsg } from './files/constants.js';
 
 const getCpus = () => {
   const cpusArr = cpus().map((cpu) => cpu.model);
   console.log(`Overall amount of CPUS: ${cpusArr.length}`);
   console.log(cpusArr);
+};
+
+const getUserName = () => {
+  const userName = userInfo().username;
+  console.log('userName', userName);
 };
 
 export const getOsInfo = async (arg) => {
@@ -19,6 +24,9 @@ export const getOsInfo = async (arg) => {
       break;
       case 'homedir':
       console.log(homedir());
+      break;
+      case 'username':
+      getUserName();
       break;
     default:
       console.log(OperationFailMsg);
