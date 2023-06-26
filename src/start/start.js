@@ -53,8 +53,20 @@ const start = async () => {
   });
 
   stdin.on('data', async (data) => {
-    const currentCommandArray = data.toString().trim().split(' ');
-    const [command, source, destination] = currentCommandArray;
+    const currentCommand = data.toString().trim();
+    let currentCommandArray;
+
+    if (currentCommand.includes('"')) {
+      currentCommandArray = currentCommand.split('"');
+    } else {
+      currentCommandArray = currentCommand.split(' ');
+    }
+    currentCommandArray = currentCommandArray.filter((val) => val !== ' ');
+    let [command, source, destination] = currentCommandArray;
+    command = command.trim();
+    source = source?.trim();
+    destination = destination?.trim();
+
 
     if (command.includes('.exit')) {
       exitProgram(userName);
@@ -101,7 +113,7 @@ const start = async () => {
         await getOsInfo(source);
         break;
       default:
-        console.log(invalidInputMsg);
+        console.error(invalidInputMsg);
     }
     setTimeout(showHomeDir, 100);
   });
